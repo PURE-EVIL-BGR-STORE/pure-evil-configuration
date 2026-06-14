@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:9001}
+  port: 
   servlet:
     context-path: /profile
 
@@ -11,9 +11,9 @@ spring:
       enabled: false
   # PostgreSQL Database
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/pureevilstore}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:root}
+    url: 
+    username: 
+    password: 
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
