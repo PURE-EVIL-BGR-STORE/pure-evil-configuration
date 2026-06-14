@@ -33,6 +33,12 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
 
+# Actuator Configuration
+management:
+  endpoint:
+    gateway:
+      enabled: true
+
 # Logging Configuration
 logging:
   level:
