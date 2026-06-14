@@ -1,5 +1,5 @@
 server:
-  port: 
+  port: ${PROFILE_SERVER_PORT}
   servlet:
     context-path: /profile
 
@@ -11,9 +11,9 @@ spring:
       enabled: false
   # PostgreSQL Database
   datasource:
-    url: 
-    username: 
-    password: 
+    url: ${PROFILE_DB_URL}
+    username: ${PROFILE_DB_USERNAME}
+    password: ${PROFILE_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -31,21 +31,21 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8180/realms/pureevilstore}
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
 
   # Config Kafka AMQP
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 # Config Identity Service
 identity-service:
-  url: ${IDENTITY_SERVICE_URL:http://localhost:8180}
-  client-id: ${IDENTITY_CLIENT_ID:pureevilstore}
-  client-secret: ${IDENTITY_CLIENT_SECRET:hhByL1xDjmL9kwypUIM26SHJjLXllTHt}
-  realm-name: ${IDENTITY_REALM_NAME:pureevilstore}
+  url: ${IDENTITY_SERVICE_URL}
+  client-id: ${IDENTITY_CLIENT_ID}
+  client-secret: ${IDENTITY_CLIENT_SECRET}
+  realm-name: ${IDENTITY_REALM_NAME}
 
 # Config AWS S3
 cloud:
@@ -62,7 +62,7 @@ cloud:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+      defaultZone: ${EUREKA_SERVER_URL}
 
 # Config SpringDoc / Swagger UI
 springdoc:

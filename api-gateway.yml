@@ -1,6 +1,6 @@
 # Server Configuration
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${GATEWAY_SERVER_PORT}
 
 # API Configuration
 app:
@@ -25,13 +25,13 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8180/realms/pureevilstore}
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
 
 # Eureka Client Configuration
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+      defaultZone: ${EUREKA_SERVER_URL}
 
 # Logging Configuration
 logging:
