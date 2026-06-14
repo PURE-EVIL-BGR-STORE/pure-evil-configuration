@@ -18,7 +18,7 @@ spring:
         - id: profile-service
           uri: lb://profile-service
           predicates:
-            - Path=${app.api-prefix}/profiles/**
+            - Path=/api/v1/profiles/**
           filters:
             - StripPrefix=2
   security:
