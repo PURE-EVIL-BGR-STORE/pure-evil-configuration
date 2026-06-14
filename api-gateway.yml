@@ -37,4 +37,5 @@ eureka:
 logging:
   level:
     root: INFO
-    com.example.apigateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    com.pureevilstore.gateway: DEBUG
