@@ -1,0 +1,44 @@
+server:
+  port: ${PRODUCT_SERVER_PORT:9005}
+  servlet:
+    context-path: /products
+
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/product_db?authSource=admin
+
+  # Cấu hình Kafka Consumer để lắng nghe event từ profile-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+# Cấu hình Brevo gửi Email (Lấy từ notification-service cũ của bạn)
+notification:
+  email:
+    brevo-url: https://api.brevo.com
+    brevo-apikey: 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
+
+# Config Eureka Client
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka}
+
+# Config SpringDoc / Swagger UI cho Product Service
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
