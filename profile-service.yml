@@ -1,7 +1,7 @@
 server:
   port: ${PROFILE_SERVER_PORT}
   servlet:
-    context-path: 
+    context-path: /profiles
 
 spring:
   application:
@@ -65,7 +65,7 @@ eureka:
 
 # Config SpringDoc / Swagger UI
 springdoc:
-  api-docs: 
+  api-docs:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
