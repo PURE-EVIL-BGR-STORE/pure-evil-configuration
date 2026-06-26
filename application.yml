@@ -1,6 +1,14 @@
 spring:
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+    listener:
+      observation-enabled: true
+    template:
+      observation-enabled: true
 
 eureka:
   client:
@@ -25,3 +33,10 @@ management:
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+resilience4j.ratelimiter:
+  instances:
+    default:
+      limitForPeriod: 50
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0s
