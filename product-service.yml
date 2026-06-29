@@ -8,7 +8,7 @@ spring:
     name: product-service
   data:
     mongodb:
-      uri: mongodb://root:root@localhost:27017/product_db?authSource=admin
+      uri: ${PRODUCT_MONGODB_URI:mongodb://root:root@localhost:27017/product_db?authSource=admin}
 
   # Cấu hình Kafka Consumer để lắng nghe event từ profile-service
   kafka:
@@ -25,7 +25,7 @@ spring:
 notification:
   email:
     brevo-url: https://api.brevo.com
-    brevo-apikey: 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
+    brevo-apikey: ${BREVO_API_KEY}
 
 # Config Eureka Client
 eureka:
