@@ -1,7 +1,7 @@
 server:
   port: ${PRODUCT_SERVER_PORT:9005}
   servlet:
-    context-path: /products
+    context-path: /
 
 spring:
   application:
