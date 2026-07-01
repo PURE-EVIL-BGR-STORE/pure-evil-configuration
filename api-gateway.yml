@@ -21,6 +21,13 @@ spring:
             - Path=/api/v1/profiles/**
           filters:
             - StripPrefix=2
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/v1/products/**, /api/v1/categories/**
+          filters:
+            - StripPrefix=2      
   security:
     oauth2:
       resourceserver:
