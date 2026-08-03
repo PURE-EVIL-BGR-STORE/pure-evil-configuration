@@ -1,0 +1,66 @@
+server:
+  port: ${PAYMENT_SERVER_PORT:9003}
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: payment-service
+  cloud:
+    compatibility-verifier:
+      enabled: false
+
+  # PostgreSQL Database
+  datasource:
+    url: ${PAYMENT_DB_URL:jdbc:postgresql://localhost:5433/payment_db}
+    username: ${PAYMENT_DB_USERNAME:root}
+    password: ${PAYMENT_DB_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  # OAuth2 Resource Server Security
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwt-set-uri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:http://localhost:8180/realms/pureevilstore/protocol/openid-connect/certs}
+
+  # Kafka Message Broker
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+
+# Config PayOS Gateway
+payos:
+  client-id: ${PAYOS_CLIENT_ID}
+  api-key: ${PAYOS_API_KEY}
+  checksum-key: ${PAYOS_CHECKSUM_KEY}
+  return-url: http://localhost:3000/checkout/success
+  cancel-url: http://localhost:3000/checkout/cancel
+
+# Config Eureka Client
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+
+# Config SpringDoc / Swagger UI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
