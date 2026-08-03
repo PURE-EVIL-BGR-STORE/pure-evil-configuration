@@ -6,12 +6,21 @@ server:
 spring:
   application:
     name: product-service
-  mongodb:
-    uri: ${PRODUCT_MONGODB_URI:mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER_HOST}/${MONGODB_DATABASE:product_db}?retryWrites=true&w=majority&appName=${MONGODB_APP_NAME:pure-evil-store}}
+  data:
+    mongodb:
+      uri: ${PRODUCT_MONGODB_URI:mongodb://root:root@localhost:27017/product_db?authSource=admin}
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URIS:http://localhost:9200}
 
   # Cấu hình Kafka Consumer để lắng nghe event từ profile-service
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
     consumer:
       group-id: notification-group
       auto-offset-reset: earliest
@@ -20,7 +29,7 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
 
-# Cấu hình Brevo gửi Email (Lấy từ notification-service cũ của bạn)
+# Cấu hình Brevo gửi Email
 notification:
   email:
     brevo-url: https://api.brevo.com
