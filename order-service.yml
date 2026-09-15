@@ -1,5 +1,5 @@
 server:
-  port: ${ORDER_SERVER_PORT:9002}
+  port: ${ORDER_SERVER_PORT:9003}
   servlet:
     context-path: /
 
@@ -51,9 +51,9 @@ spring:
 app:
   services:
     product-service:
-      url: http://localhost:9005
+      url: ${PRODUCT_SERVICE_URL:http://localhost:9002}
     payment-service:
-      url: http://localhost:9003
+      url: ${PAYMENT_SERVICE_URL:http://localhost:9004}
 
 # Config Eureka Client
 eureka:

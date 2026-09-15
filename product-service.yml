@@ -1,5 +1,5 @@
 server:
-  port: ${PRODUCT_SERVER_PORT:9005}
+  port: ${PRODUCT_SERVER_PORT:9002}
   servlet:
     context-path: /
 
@@ -8,7 +8,7 @@ spring:
     name: product-service
   data:
     mongodb:
-      uri: ${PRODUCT_MONGODB_URI:mongodb://root:root@localhost:27017/product_db?authSource=admin}
+      uri: ${PRODUCT_MONGODB_URI:mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER_HOST}/${MONGODB_DATABASE:product_db}?retryWrites=true&w=majority}
   elasticsearch:
     uris: ${ELASTICSEARCH_URIS:http://localhost:9200}
 
@@ -34,6 +34,8 @@ notification:
   email:
     brevo-url: https://api.brevo.com
     brevo-apikey: ${BREVO_API_KEY}
+    hotline: ${NOTIFICATION_EMAIL_HOTLINE:0906178691}
+    logo-url: ${NOTIFICATION_EMAIL_LOGO_URL}
 
 # Config AWS S3
 cloud:

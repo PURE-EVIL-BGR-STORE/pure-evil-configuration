@@ -1,5 +1,5 @@
 server:
-  port: ${PAYMENT_SERVER_PORT:9003}
+  port: ${PAYMENT_SERVER_PORT:9004}
   servlet:
     context-path: /
 
